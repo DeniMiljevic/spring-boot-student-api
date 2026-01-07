@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.model.Student;
 import com.example.demo.service.StudentService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ public class StudentController {
 
     // 1. DODAJ NOVOG STUDENTA
     @PostMapping
-    public ResponseEntity<Student> spremiStudenta(@RequestBody Student student) {
+    public ResponseEntity<Student> spremiStudenta(@Valid @RequestBody Student student) {
         Student spremljenStudent = studentService.spremiStudenta(student);
         return ResponseEntity.ok(spremljenStudent);
     }
@@ -40,7 +41,7 @@ public class StudentController {
 
     // UPDATE - AŽURIRAJ STUDENTA
     @PutMapping("/{id}")
-    public ResponseEntity<Student> azurirajStudenta(@PathVariable Long id, @RequestBody Student student) {
+    public ResponseEntity<Student> azurirajStudenta(@PathVariable Long id,@Valid @RequestBody Student student) {
         Student azuriranStudent = studentService.azurirajStudenta(id, student);
         if (azuriranStudent != null) {
             return ResponseEntity.ok(azuriranStudent);
